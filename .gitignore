@@ -1,0 +1,15 @@
+*
+
+!/.gitignore
+
+!*.go
+!go.sum
+!go.mod
+!.golangci.yml
+!CHANGELOG.md
+!.github/workflows/*.yml
+
+!README.md
+!LICENSE
+
+!*/

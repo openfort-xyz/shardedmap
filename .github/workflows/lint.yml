@@ -1,0 +1,62 @@
+name: Go CI/CD
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  release:
+    types: [published]
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    outputs:
+      workspace: ${{ steps.setup-path.outputs.workspace }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+            persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.20.0
+
+      - name: Set up workspace path
+        id: setup-path
+        run: echo "workspace=${{ github.workspace }}" >> $GITHUB_ENV
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Use workspace
+        run: echo "Using workspace ${{ env.workspace }}"
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v4
+        with:
+          version: 1.61.0
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Use workspace
+        run: echo "Using workspace ${{ env.workspace }}"
+
+      - name: Run go test
+        run: go test -v ./...
+          
+
+
