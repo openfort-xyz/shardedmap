@@ -14,7 +14,7 @@ on:
 
 jobs:
   setup:
-    name: Setup
+    name: Test/Lint
     runs-on: ubuntu-latest
     outputs:
       workspace: ${{ steps.setup-path.outputs.workspace }}
