@@ -1,6 +1,6 @@
 # shardedmap
 ![Coverage](https://img.shields.io/badge/Coverage-100.0%25-brightgreen)
-
+[![Go Report Card](https://goreportcard.com/badge/go.openfort.xyz/shardedmap)](https://goreportcard.com/report/go.openfort.xyz/shardedmap)
 
 ```go
 import "go.openfort.xyz/shardedmap"
